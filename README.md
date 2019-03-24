@@ -9,6 +9,6 @@
 
 ### 本工具基于[SwagDefGen](https://github.com/Roger13/SwagDefGen), 应该数中国升级版吧，支持SwaggerPHP-UI,OpenApi3.x
 
-### 如果喜欢，可以打赏一下，谢谢！
+### 如果喜欢，可以支付宝打赏一下，谢谢！
 ![感谢大佬](http://www.ninja911.com/images/pay2me/alipay.png)
 

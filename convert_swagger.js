@@ -139,12 +139,15 @@ function convert() {
     Global variables updated: 
     -outSwagger
     */
+    //debugger;
 
 		outSwagger += indentator + 'type="array",description="",';
 		// ---- Begin items scope ----
 		outSwagger += indentator + OA_FLAG + '\\Items(';
-		//outSwagger += indentator + 'items: {';
-		conversorSelection(obj);
+		if (obj) {
+			//outSwagger += indentator + 'items: {';
+			conversorSelection(obj);
+		}
 		outSwagger += indentator + '),';
 		// ---- End items scope ----
 	};
@@ -230,32 +233,32 @@ function convert() {
 	outSwagger += indentator + 'tags={"接口分类"},';
 	//For each object inside the JSON
 	if (source_request) {
-	outSwagger += indentator + OA_FLAG + '\\Parameter(';
-	outSwagger += indentator + "\t" + 'name="page",';
-	outSwagger += indentator + "\t" + 'in="query",';
-	outSwagger += indentator + "\t" + 'required=true,';
-	outSwagger += indentator + "\t" + 'description="当前页",';
-	outSwagger += indentator + "\t" + OA_FLAG + '\\Schema(';
-	outSwagger += indentator + "\t\t" + 'type="integer",';
-	outSwagger += indentator + "\t\t" + 'default="1",';
-	outSwagger += indentator + "\t\t" + 'description="当前多少页码",';
-	outSwagger += indentator + "\t" + '),';
-	outSwagger += indentator + '),';
-	outSwagger += indentator + OA_FLAG + '\\Parameter(';
-	outSwagger += indentator + "\t" + 'name="flag",';
-	outSwagger += indentator + "\t" + 'in="path",';
-	outSwagger += indentator + "\t" + 'required=true,';
-	outSwagger += indentator + "\t" + 'description="标识",';
-	outSwagger += indentator + "\t" + OA_FLAG + '\\Schema(';
-	outSwagger += indentator + "\t\t" + 'type="string",';
-	outSwagger += indentator + "\t\t" + 'default="zhangmazi",';
-	outSwagger += indentator + "\t\t" + 'description="用户ID描述",';
-	outSwagger += indentator + "\t" + '),';
-	outSwagger += indentator + '),';
-	outSwagger += indentator + OA_FLAG + '\\RequestBody(';
-	outSwagger += indentator + "\t" + OA_FLAG + '\\MediaType(';
-	outSwagger += indentator + "\t" + "\t" + 'mediaType="application/json",';
-	changeIndentation(2);
+		outSwagger += indentator + OA_FLAG + '\\Parameter(';
+		outSwagger += indentator + "\t" + 'name="page",';
+		outSwagger += indentator + "\t" + 'in="query",';
+		outSwagger += indentator + "\t" + 'required=true,';
+		outSwagger += indentator + "\t" + 'description="当前页",';
+		outSwagger += indentator + "\t" + OA_FLAG + '\\Schema(';
+		outSwagger += indentator + "\t\t" + 'type="integer",';
+		outSwagger += indentator + "\t\t" + 'default="1",';
+		outSwagger += indentator + "\t\t" + 'description="当前多少页码",';
+		outSwagger += indentator + "\t" + '),';
+		outSwagger += indentator + '),';
+		outSwagger += indentator + OA_FLAG + '\\Parameter(';
+		outSwagger += indentator + "\t" + 'name="flag",';
+		outSwagger += indentator + "\t" + 'in="path",';
+		outSwagger += indentator + "\t" + 'required=true,';
+		outSwagger += indentator + "\t" + 'description="标识",';
+		outSwagger += indentator + "\t" + OA_FLAG + '\\Schema(';
+		outSwagger += indentator + "\t\t" + 'type="string",';
+		outSwagger += indentator + "\t\t" + 'default="zhangmazi",';
+		outSwagger += indentator + "\t\t" + 'description="用户ID描述",';
+		outSwagger += indentator + "\t" + '),';
+		outSwagger += indentator + '),';
+		outSwagger += indentator + OA_FLAG + '\\RequestBody(';
+		outSwagger += indentator + "\t" + OA_FLAG + '\\MediaType(';
+		outSwagger += indentator + "\t" + "\t" + 'mediaType="application/json",';
+		changeIndentation(2);
 		outSwagger += indentator + "\t" +  OA_FLAG + '\\Schema(';
 		changeIndentation(4);
 		for (var obj in source_request) {
@@ -289,9 +292,9 @@ function convert() {
 	outSwagger += indentator + "\t" + 'description="返回正确",';
 	//For each object inside the JSON
 	if (source_response) {
-	outSwagger += indentator + "\t" + OA_FLAG + '\\MediaType(';
-	outSwagger += indentator + "\t" + "\t" + 'mediaType="application/json",';
-	changeIndentation(2);
+		outSwagger += indentator + "\t" + OA_FLAG + '\\MediaType(';
+		outSwagger += indentator + "\t" + "\t" + 'mediaType="application/json",';
+		changeIndentation(2);
 		outSwagger += indentator +  OA_FLAG + '\\Schema(';
 		changeIndentation(3);
 		for (var obj in source_response) {
@@ -302,6 +305,7 @@ function convert() {
 			// ---- End schema scope ----
 		}
 		changeIndentation(tabCount - 1);
+		outSwagger += indentator + '),';
 		outSwagger += indentator + '),';
 		//Remove last comma
 		outSwagger = outSwagger.substring(0, outSwagger.length - 1);

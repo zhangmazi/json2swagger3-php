@@ -1,4 +1,5 @@
 function convert() {
+	var version = '1.0.1'
 	// ---- Global variables ----
 	var source_request, source_response, inJSON, outSwagger, tabCount, indentator, prefixStar;
 	outSwagger = '';

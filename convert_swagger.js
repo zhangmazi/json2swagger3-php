@@ -1,6 +1,6 @@
 function getVersion() {
-	var version = '1.0.1';
-	var build = '20190329';
+	var version = '1.0.2';
+	var build = '20190330';
 
 	return {'version':version, 'build':build};
 }
@@ -16,7 +16,8 @@ function convert() {
 	outSwagger = '';
 	prefixStar = '     *    ';
 
-	var OA_FLAG = '@OA';
+	var OA_FLAG = '@OA\\';
+	var STR_TAB = '    ';
 
 
 	const DESC_MAP ={
@@ -68,7 +69,7 @@ function convert() {
 			indentator = '\n' + prefixStar;
 		}
 		for (; i < count; i++) {
-			indentator += '\t';
+			indentator += STR_TAB;
 		}
 		//Update tabCount
 		tabCount = count;
@@ -117,7 +118,7 @@ function convert() {
 		} else {
 			outSwagger += indentator + str_star + 'type="number"';
 		}
-		outSwagger += "," + indentator + str_star + 'example=""';
+		outSwagger += "," + indentator + str_star + 'example="'+ num +'"';
 		outSwagger += "," + indentator + str_star + 'description="'+ mapDesc(prop) +'"';
 
 	};
@@ -141,7 +142,7 @@ function convert() {
 			outSwagger += ',';
 			outSwagger += indentator + 'format="date"';
 		}
-		outSwagger += "," + indentator + 'example=""';
+		outSwagger += "," + indentator + 'example="'+ str +'"';
 		outSwagger += "," + indentator + 'description="'+ mapDesc(prop) +'"';
 	};
 
@@ -155,7 +156,7 @@ function convert() {
 
 		outSwagger += indentator + 'type="array",description="",';
 		// ---- Begin items scope ----
-		outSwagger += indentator + OA_FLAG + '\\Items(';
+		outSwagger += indentator + OA_FLAG + 'Items(';
 		if (obj) {
 			//outSwagger += indentator + 'items: {';
 			conversorSelection(obj);
@@ -183,7 +184,7 @@ function convert() {
 		//For each attribute inside that object
 		for (var prop in obj) {
 			// ---- Begin property type scope ----
-			outSwagger += indentator + OA_FLAG + '\\Property(property="' + prop + '",';
+			outSwagger += indentator + OA_FLAG + 'Property(property="' + prop + '",';
 			conversorSelection(obj[prop], prop);
 			outSwagger += indentator + '),'
 			// ---- End property type scope ----
@@ -237,7 +238,7 @@ function convert() {
 	tabCount = 0;
 	indentator = "\n" + prefixStar;
 
-	outSwagger += prefixStar + OA_FLAG + '\\Get(';
+	outSwagger += prefixStar + OA_FLAG + 'Get(';
 	changeIndentation(1);
 	outSwagger += indentator + 'path="/just/one/demo/{flag}",';
 	outSwagger += indentator + 'summary="接口概要",';
@@ -245,37 +246,37 @@ function convert() {
 	outSwagger += indentator + 'tags={"接口分类"},';
 	//For each object inside the JSON
 	if (source_request) {
-		outSwagger += indentator + OA_FLAG + '\\Parameter(';
-		outSwagger += indentator + "\t" + 'name="page",';
-		outSwagger += indentator + "\t" + 'in="query",';
-		outSwagger += indentator + "\t" + 'required=true,';
-		outSwagger += indentator + "\t" + 'description="当前页",';
-		outSwagger += indentator + "\t" + OA_FLAG + '\\Schema(';
-		outSwagger += indentator + "\t\t" + 'type="integer",';
-		outSwagger += indentator + "\t\t" + 'default="1",';
-		outSwagger += indentator + "\t\t" + 'description="当前多少页码",';
-		outSwagger += indentator + "\t" + '),';
+		outSwagger += indentator + OA_FLAG + 'Parameter(';
+		outSwagger += indentator + STR_TAB + 'name="page",';
+		outSwagger += indentator + STR_TAB + 'in="query",';
+		outSwagger += indentator + STR_TAB + 'required=true,';
+		outSwagger += indentator + STR_TAB + 'description="当前页",';
+		outSwagger += indentator + STR_TAB + OA_FLAG + 'Schema(';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'type="integer",';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'default="1",';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'description="当前多少页码",';
+		outSwagger += indentator + STR_TAB + '),';
 		outSwagger += indentator + '),';
-		outSwagger += indentator + OA_FLAG + '\\Parameter(';
-		outSwagger += indentator + "\t" + 'name="flag",';
-		outSwagger += indentator + "\t" + 'in="path",';
-		outSwagger += indentator + "\t" + 'required=true,';
-		outSwagger += indentator + "\t" + 'description="标识",';
-		outSwagger += indentator + "\t" + OA_FLAG + '\\Schema(';
-		outSwagger += indentator + "\t\t" + 'type="string",';
-		outSwagger += indentator + "\t\t" + 'default="zhangmazi",';
-		outSwagger += indentator + "\t\t" + 'description="用户ID描述",';
-		outSwagger += indentator + "\t" + '),';
+		outSwagger += indentator + OA_FLAG + 'Parameter(';
+		outSwagger += indentator + STR_TAB + 'name="flag",';
+		outSwagger += indentator + STR_TAB + 'in="path",';
+		outSwagger += indentator + STR_TAB + 'required=true,';
+		outSwagger += indentator + STR_TAB + 'description="标识",';
+		outSwagger += indentator + STR_TAB + OA_FLAG + 'Schema(';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'type="string",';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'default="zhangmazi",';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'description="用户ID描述",';
+		outSwagger += indentator + STR_TAB + '),';
 		outSwagger += indentator + '),';
-		outSwagger += indentator + OA_FLAG + '\\RequestBody(';
-		outSwagger += indentator + "\t" + OA_FLAG + '\\MediaType(';
-		outSwagger += indentator + "\t" + "\t" + 'mediaType="application/json",';
+		outSwagger += indentator + OA_FLAG + 'RequestBody(';
+		outSwagger += indentator + STR_TAB + OA_FLAG + 'MediaType(';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'mediaType="application/json",';
 		changeIndentation(2);
-		outSwagger += indentator + "\t" +  OA_FLAG + '\\Schema(';
+		outSwagger += indentator + STR_TAB +  OA_FLAG + 'Schema(';
 		changeIndentation(4);
 		for (var obj in source_request) {
 			// ---- Begin schema scope ----
-			outSwagger += indentator + ' @OA\\Property(property="' + obj + '",';
+			outSwagger += indentator + ' ' + OA_FLAG + 'Property(property="' + obj + '",';
 			conversorSelection(source_request[obj]);
 			outSwagger += indentator + '),';
 			// ---- End schema scope ----
@@ -299,19 +300,19 @@ function convert() {
 
 	// ---- Begin definitions ----
 	changeIndentation(1);
-	outSwagger += indentator + OA_FLAG + '\\Response(';
-	outSwagger += indentator + "\t" + 'response=200,';
-	outSwagger += indentator + "\t" + 'description="返回正确",';
+	outSwagger += indentator + OA_FLAG + 'Response(';
+	outSwagger += indentator + STR_TAB + 'response=200,';
+	outSwagger += indentator + STR_TAB + 'description="返回正确",';
 	//For each object inside the JSON
 	if (source_response) {
-		outSwagger += indentator + "\t" + OA_FLAG + '\\MediaType(';
-		outSwagger += indentator + "\t" + "\t" + 'mediaType="application/json",';
+		outSwagger += indentator + STR_TAB + OA_FLAG + 'MediaType(';
+		outSwagger += indentator + STR_TAB + STR_TAB + 'mediaType="application/json",';
 		changeIndentation(2);
-		outSwagger += indentator +  OA_FLAG + '\\Schema(';
+		outSwagger += indentator +  OA_FLAG + 'Schema(';
 		changeIndentation(3);
 		for (var obj in source_response) {
 			// ---- Begin schema scope ----
-			outSwagger += indentator + ' @OA\\Property(property="' + obj + '",';
+			outSwagger += indentator + ' '+ OA_FLAG +'Property(property="' + obj + '",';
 			conversorSelection(source_response[obj]);
 			outSwagger += indentator + '),';
 			// ---- End schema scope ----

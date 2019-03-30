@@ -1,5 +1,5 @@
 function getVersion() {
-	var version = '1.0.2';
+	var version = '1.0.3';
 	var build = '20190330';
 
 	return {'version':version, 'build':build};
@@ -179,7 +179,7 @@ function convert() {
 			return;
 		}
 		// ---- Begin properties scope ----
-		outSwagger += indentator + 'type="object",';
+		outSwagger += indentator + 'type="object",description="",';
 		changeIndentation(tabCount + 1);
 		//For each attribute inside that object
 		for (var prop in obj) {
@@ -193,7 +193,6 @@ function convert() {
 		changeIndentation(tabCount - 1);
 		if (Object.keys(obj).length > 0) { //At least 1 property inserted
 			outSwagger = outSwagger.substring(0, outSwagger.length - 1); //Remove last comma
-			outSwagger += indentator + '),'
 		} else { // No property inserted
 			outSwagger += ' }';
 		}
